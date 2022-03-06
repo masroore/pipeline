@@ -11,7 +11,7 @@ class FingersCrossedProcessor implements ProcessorInterface
         foreach ($stages as $stage) {
             $stage->process($context);
 
-            if (null !== $progress_cb) {
+            if (null !== $progress_cb && is_callable($progress_cb)) {
                 $progress_cb($stage, $context);
             }
         }
