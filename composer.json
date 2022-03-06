@@ -1,18 +1,23 @@
 {
   "name": "masroore/pipeline",
-  "description": "A package to build multi-staged workflows.",
+  "description": "Pipeline pattern implementation",
   "type": "library",
   "homepage": "https://github.com/masroore/pipeline",
   "keywords": [
-    "php",
     "pipeline",
     "pipeline pattern",
+    "pipeline stage",
     "pipeline stages",
+    "sequential",
+    "workflow",
     "pipeline execution"
   ],
   "license": "BSD-2-Clause",
   "require": {
     "php": "^7.4|^8.0|^8.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
   },
   "authors": [
     {
@@ -21,9 +26,9 @@
     }
   ],
   "minimum-stability": "stable",
-  "suggest": {
-    "ext-mbstring": "For best performance",
-    "ext-intl": "For best performance"
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
