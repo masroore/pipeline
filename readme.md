@@ -76,9 +76,9 @@ The `PipelineContextInterface` type provides a `shouldHalt()` method which can b
 ## Usage
 
 ```php
-use Kaiju\Pipeline;
-use Kaiju\PipelineStageInterface;
-use Kaiju\PipelineContextInterface;
+use Kaiju\Pipeline\PipelineBuilder;
+use Kaiju\Pipeline\PipelineContextInterface;
+use Kaiju\Pipeline\PipelineStageInterface;
 
 class Payload implements PipelineContextInterface
 {
@@ -91,11 +91,6 @@ class Payload implements PipelineContextInterface
         $this->halt = false;
     }
 
-    public function data()
-    {
-        return $this->value;
-    }
-
     public function shouldHalt(): bool
     {
         return $this->halt;
@@ -106,12 +101,16 @@ class Payload implements PipelineContextInterface
         $this->halt = $halt;
     }
 
-    public function setValue(int $value): void
+    public function getPayload(): int
     {
-        $this->value = $value;
+        return $this->value;
+    }
+
+    public function setPayload($payload): void
+    {
+        $this->value = (int) $payload;
     }
 }
-
 
 class TimesTwoStage implements PipelineStageInterface
 {
@@ -125,7 +124,7 @@ class TimesTwoStage implements PipelineStageInterface
     public function id(): string
     {
         return __CLASS__;
-    }    
+    }
 }
 
 class AddOneStage implements PipelineStageInterface
@@ -133,22 +132,25 @@ class AddOneStage implements PipelineStageInterface
     public function process(PipelineContextInterface $context): void
     {
         $val = (int) $context->getPayload();
-        $val += 1;
+        $val++;
         $context->setPayload($val);
+        $context->setHalt(true);
     }
 
     public function id(): string
     {
         return __CLASS__;
-    }    
+    }
 }
 
-$builder = (new PipelineBuilder)
-    ->addStage(new TimesTwoStage)
-    ->addStage(new AddOneStage);
+$payload = new Payload(10);
+$builder = (new PipelineBuilder())
+    ->addStage(new TimesTwoStage())
+    ->addStage(new AddOneStage());
 $pipeline = $builder->build();
-$pipeline($context);
-echo 'Value is: ' . $context->getPayload();
+$pipeline($payload);
+echo 'Value is: ' . $payload->getPayload();
+
 ```
 
 Check `examples` directory for more.
