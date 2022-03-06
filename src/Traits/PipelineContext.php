@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Kaiju\Pipeline\Traits;
+
 trait PipelineContext
 {
     protected bool $halt = false;
