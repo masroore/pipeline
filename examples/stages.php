@@ -2,26 +2,17 @@
 
 use Kaiju\Pipeline\PipelineContextInterface;
 use Kaiju\Pipeline\PipelineStageInterface;
+use Kaiju\Pipeline\Traits\PipelineContext;
 
 class Payload implements PipelineContextInterface
 {
+    use PipelineContext;
+
     private int $value;
-    private bool $halt;
 
     public function __construct(int $value)
     {
         $this->value = $value;
-        $this->halt = false;
-    }
-
-    public function shouldHalt(): bool
-    {
-        return $this->halt;
-    }
-
-    public function setHalt(bool $halt): void
-    {
-        $this->halt = $halt;
     }
 
     public function getPayload(): int
