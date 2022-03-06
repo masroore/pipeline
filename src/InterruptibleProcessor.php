@@ -12,7 +12,6 @@ class InterruptibleProcessor implements ProcessorInterface
             $stage->process($context);
 
             if (null !== $progress_cb) {
-                $progress_cb->invoke($stage, $context);
                 $progress_cb($stage, $context);
             }
 
