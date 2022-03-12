@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kaiju\Pipeline\Traits;
 
-trait PipelineContext
+trait HaltablePipeline
 {
     protected bool $halt = false;
 
@@ -13,7 +13,7 @@ trait PipelineContext
         return $this->halt;
     }
 
-    public function setHalt(bool $halt): void
+    public function setHalt(bool $halt = true): void
     {
         $this->halt = $halt;
     }

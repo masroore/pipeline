@@ -25,6 +25,10 @@
       "role": "Developer"
     }
   ],
+  "support": {
+        "issues": "https://github.com/masroore/pipeline/issues",
+        "source": "https://github.com/masroore/pipeline"
+  },  
   "minimum-stability": "stable",
   "prefer-stable": true,
   "config": {

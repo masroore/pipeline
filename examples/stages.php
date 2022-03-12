@@ -2,11 +2,11 @@
 
 use Kaiju\Pipeline\PipelineContextInterface;
 use Kaiju\Pipeline\PipelineStageInterface;
-use Kaiju\Pipeline\Traits\PipelineContext;
+use Kaiju\Pipeline\Traits\HaltablePipeline;
 
 class Payload implements PipelineContextInterface
 {
-    use PipelineContext;
+    use HaltablePipeline;
 
     private int $value;
 

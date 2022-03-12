@@ -10,7 +10,7 @@ interface PipelineContextInterface
 
     public function shouldHalt(): bool;
 
-    public function setHalt(bool $halt): void;
+    public function setHalt(bool $halt = true): void;
 
     /**
      * @param mixed payload
